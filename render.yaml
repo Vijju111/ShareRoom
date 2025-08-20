@@ -4,12 +4,12 @@ services:
     env: node
     region: oregon
     plan: free
-    runtime: node:18
+    runtime: node:20
     buildCommand: npm install
     startCommand: npm start
     disk:
       name: shareroom-data
-      mountPath: /var/data
+      mountPath: /var/render/data
     environment:
       - key: NODE_ENV
         value: production

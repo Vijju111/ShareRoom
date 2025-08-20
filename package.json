@@ -2,7 +2,7 @@
   "name": "shareroom",
   "version": "2.0.0",
   "scripts": {
-    "prestart": "rm -rf uploads messages.db && ln -sf /var/data/uploads ./uploads && ln -sf /var/data/messages.db ./messages.db || true",
+    "prestart": "rm -rf uploads messages.db && ln -sf /var/render/data/uploads ./uploads && ln -sf /var/render/data/messages.db ./messages.db || true",
     "start": "node server.js"
   },
   "dependencies": {
@@ -12,6 +12,6 @@
     "multer": "^1.4.5-lts.1"
   },
   "engines": {
-    "node": ">=18.18.0 <19.0.0"
+    "node": ">=20.0.0 <21.0.0"
   }
 }
