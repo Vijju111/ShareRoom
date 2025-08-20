@@ -2,7 +2,7 @@
   "name": "shareroom",
   "version": "2.0.0",
   "scripts": {
-    "prestart": "mkdir -p /var/data && mkdir -p /var/data/uploads && rm -rf uploads messages.db && ln -sf /var/data/uploads ./uploads && ln -sf /var/data/messages.db ./messages.db || true",
+    "prestart": "rm -rf uploads messages.db && ln -sf /var/data/uploads ./uploads && ln -sf /var/data/messages.db ./messages.db || true",
     "start": "node server.js"
   },
   "dependencies": {

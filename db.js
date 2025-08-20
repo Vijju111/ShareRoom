@@ -7,19 +7,24 @@ const DATA_DIR = '/var/data';
 const DB_PATH = path.join(DATA_DIR, 'messages.db');
 const UPLOAD_DIR = path.join(DATA_DIR, 'uploads');
 
-// Ensure directories exist
-if (!fs.existsSync(DATA_DIR)) {
-  console.log('📁 Creating /var/data...');
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-}
+// ✅ Do NOT try to create /var/data — Render does it for you
+// ✅ But ensure /var/data/uploads exists (Render doesn't auto-create subdirs)
+
 if (!fs.existsSync(UPLOAD_DIR)) {
   console.log('📁 Creating /var/data/uploads...');
-  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+  try {
+    fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+  } catch (err) {
+    console.error('❌ Failed to create /var/data/uploads:', err.message);
+    // If it fails, uploads will fail — but don't crash
+  }
+} else {
+  console.log('📁 /var/data/uploads already exists');
 }
 
-// Log for debugging
-console.log('🔧 Using DB path:', DB_PATH);
-console.log('📄 File exists:', fs.existsSync(DB_PATH));
+// Log paths for debugging
+console.log('🔧 Database path:', DB_PATH);
+console.log('📄 DB file exists:', fs.existsSync(DB_PATH));
 
 // Open database
 const db = new sqlite3.Database(DB_PATH, (err) => {
@@ -27,7 +32,7 @@ const db = new sqlite3.Database(DB_PATH, (err) => {
     console.error('❌ Failed to open database:', err.message);
     return;
   }
-  console.log('✅ Database connected successfully at:', DB_PATH);
+  console.log('✅ Database connected successfully');
 });
 
 // Create table
@@ -48,7 +53,7 @@ db.serialize(() => {
     if (err) {
       console.error('❌ Table creation failed:', err.message);
     } else {
-      console.log('📋 Table "messages" is ready (rows:', this.changes, ')');
+      console.log('📋 Table "messages" is ready');
     }
   });
 
