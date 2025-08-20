@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShareRoom</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="entry-screen">
+    <h1>🗨️ ShareRoom</h1>
+    <p>Enter your name and join a room</p>
+    <input type="text" id="username" placeholder="Your Name" maxlength="30" />
+    <select id="room-select">
+      <option value="general">💬 General</option>
+      <option value="tech">💻 Tech</option>
+      <option value="music">🎵 Music</option>
+      <option value="art">🎨 Art</option>
+    </select>
+    <label><input type="checkbox" id="dark-mode-toggle" /> Dark Mode</label>
+    <button onclick="joinChat()">Enter Chat</button>
+  </div>
+
+  <div id="chat-container" style="display:none;">
+    <header>
+      <h2 id="room-title">💬 Room</h2>
+      <div>
+        <button id="theme-toggle" onclick="toggleTheme()">🌓</button>
+        <button id="logout-btn" onclick="logout()">Exit</button>
+      </div>
+    </header>
+    <div id="messages"></div>
+    <div id="input-area">
+      <input type="text" id="message-input" placeholder="Type a message..." />
+      <input type="file" id="file-input" />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

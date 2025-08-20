@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: shareroom-app
+    env: node
+    region: oregon
+    plan: free
+    runtime: node:18
+    buildCommand: npm install
+    startCommand: npm start
+    disk:
+      name: shareroom-data
+      mountPath: /var/data
+    environment:
+      - key: NODE_ENV
+        value: production
+    redirects:
+      - source: /favicon.ico
+        destination: https://ui-avatars.com/api/?name=ShareRoom&background=6a11cb&color=fff
+    healthCheckPath: /
